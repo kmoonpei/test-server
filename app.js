@@ -3,6 +3,8 @@ var app = express();
 var connection = require('./modle/mysql');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var axios = require('axios');
+var getData = require('./route/route')
 // var FileStore = require('session-file-store')(session);
 
 // var cookieParser = require('cookie-parser');
@@ -81,9 +83,22 @@ app.post('/user/order_list', function (req, res, next) {
 
 })
 
+//微信登录
+app.post('/user/loginWx', function (req, res, next) {
+    var code = req.body.code;
+    var APPID = 'wx0e1c3d3df616a660';
+    var APPSECRET = '6589dc67b26199b5396907f5ddb41780';
+    var url = `https://api.weixin.qq.com/sns/jscode2session?appid=${APPID}&secret=${APPSECRET}&js_code=${code}&grant_type=authorization_code`
+
+    getData(url, function (data) {
+        res.send(data)
+    })
+})
+
+
 
 function successResponse(data, msg = '') {
-    return { code: 0, msg, data: data }
+    return { code: 0, msg: msg, data: data }
 }
 
 app.use(express.static('public'));
