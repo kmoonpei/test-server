@@ -3,8 +3,10 @@ var app = express();
 var connection = require('./modle/mysql');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-var axios = require('axios');
-var getData = require('./route/route')
+// var axios = require('axios');
+var getData = require('./route/route');
+const crypto = require('crypto');
+// var getSessionKey = require('./route/getSessionKey');
 // var FileStore = require('session-file-store')(session);
 
 // var cookieParser = require('cookie-parser');
@@ -91,11 +93,17 @@ app.post('/user/loginWx', function (req, res, next) {
     var url = `https://api.weixin.qq.com/sns/jscode2session?appid=${APPID}&secret=${APPSECRET}&js_code=${code}&grant_type=authorization_code`
 
     getData(url, function (data) {
-        res.send(data)
+        const session_key = JSON.parse(data).session_key;
+        console.log('data', data)
+        const skey = encryptSha1(session_key);
+        res.send(successResponse({ skey: skey}, '登录成功'))
     })
 })
 
 
+function encryptSha1(data) {
+    return crypto.createHash('sha1').update(data, 'utf8').digest('hex')
+}
 
 function successResponse(data, msg = '') {
     return { code: 0, msg: msg, data: data }
