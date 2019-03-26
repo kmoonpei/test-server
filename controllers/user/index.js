@@ -1,6 +1,7 @@
 const { hello, login, logout } = require('./login');
 const login_WX = require('./loginWX');
 const { order_list, getUsers } = require('./orderlist');
+const createCook = require('./createCook');
 
 const user_controller = {
     hello,
@@ -9,5 +10,6 @@ const user_controller = {
     logout,
     order_list,
     getUsers,
+    createCook,
 }
 module.exports = user_controller;

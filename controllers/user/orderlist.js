@@ -13,7 +13,7 @@ const order_list = (req, res, next) => {
             res.send({ code: 1, msg: '用户还未登录，请先登录' })
         }
     } else {
-        res.send({ code: 0, msg: '参数错误' })
+        res.send({ code: 1, msg: '参数错误' })
     }
 
 }
