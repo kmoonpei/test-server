@@ -1,12 +1,12 @@
-var express = require('express');
-var router = express.Router();
-
+var router = require('./index');
 //控制器模块
 const user_controller = require('../controllers/user');
 
 ///路由///
 
 router.get('/user', user_controller.hello);
+//注册
+router.post('/user/register', user_controller.register);
 //微信登录
 router.post('/user/loginWX', user_controller.login_WX);
 //登录

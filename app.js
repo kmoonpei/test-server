@@ -4,10 +4,13 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var userRouter = require('./route/user');
 var indexRouter = require('./route/index');
+var uploadRouter = require('./route/upload');
+var caipuRouter = require('./route/caipu');
 
 
 
 app.use(bodyParser.json());
+
 
 // 配置session
 app.use(session({
@@ -23,12 +26,15 @@ app.use(session({
 }));
 
 app.get('/user', userRouter);
+app.post('/user/register', userRouter);
 app.post('/user/loginWX', userRouter);
 app.post('/user/login', userRouter);
 app.get('/user/logout', userRouter);
 app.post('/user/order_list', userRouter);
 app.post('/user/data1', userRouter);
-app.post('/user/createcook',userRouter);
+app.post('/user/createcook', userRouter);
+app.post('/upload', uploadRouter);
+app.post('/caipu/index', caipuRouter);
 
 
 
