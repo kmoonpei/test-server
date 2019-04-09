@@ -35,8 +35,9 @@ app.post('/user/data1', userRouter);
 app.post('/user/createcook', userRouter);
 app.post('/upload', uploadRouter);
 app.post('/caipu/index', caipuRouter);
-app.post('/caipu/detail',caipuRouter);
-
+app.post('/caipu/detail', caipuRouter);
+app.post('/user/info',userRouter);
+app.post('/user/works',userRouter);
 
 
 //静态资源

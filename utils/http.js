@@ -24,4 +24,6 @@ function getData(url, callback) {
 //     return axios.get(url)
 // }
 
-module.exports = getData;
+
+
+module.exports = { getData };
