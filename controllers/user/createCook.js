@@ -5,10 +5,10 @@ var connection = require('../../modle/mysql');
 const createCook = (req, res, next) => {
     console.log('req.body:', req.body);
 
-    const { foodName, tempFilePaths, foodDescribe, material, steps } = req.body;
-    var sql = `INSERT INTO caipu (foodName, tempFilePaths, foodDescribe, material, steps)
-    VALUES(?, ?, ?, ?, ?)`;
-    connection.query(sql, [foodName, tempFilePaths, foodDescribe, JSON.stringify(material), JSON.stringify(steps)], function (err, data) {
+    const { foodName, tempFilePaths, foodDescribe, material, steps, uid } = req.body;
+    var sql = `INSERT INTO caipu (foodName, tempFilePaths, foodDescribe, material, steps,uid)
+    VALUES(?, ?, ?, ?, ?,?)`;
+    connection.query(sql, [foodName, tempFilePaths, foodDescribe, JSON.stringify(material), JSON.stringify(steps), uid], function (err, data) {
         if (err) {
             // some error occured
             console.log('创建失败：', err)
