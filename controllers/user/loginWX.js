@@ -29,6 +29,7 @@ const login_WX = (req, res, next) => {
                     connection.query(`SELECT id FROM user1 WHERE openid="${openid}"`, function (err, rows, fields) {
                         if (err) { console.log(err) }
                         res_data.uid = rows[0].id;
+                        req.session.uid = res_data.uid;
                         res.send(successResponse(res_data, '登录成功'));
                     })
                 }

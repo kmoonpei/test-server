@@ -19,13 +19,7 @@ const order_list = (req, res, next) => {
     }
 
 }
-//测试接口
-const getUsers = (req, res) => {
-    const data = connection.query('SELECT * FROM user;', function (err, rows, fields) {
-        if (err) console.log(err);
-        res.send(successResponse(rows))
-    })
-}
+
 //获取我的发布
 const works = (req, res) => {
     let { uid } = req.body;
@@ -34,5 +28,13 @@ const works = (req, res) => {
         res.send(successResponse(rows))
     })
 }
+//获取我的收藏
+const my_collects = (req, res) => {
+    let { uid } = req.body;
+    connection.query(`SELECT * FROM collect_caipu WHERE uid="${uid}"`, function (err, rows, fields) {
+        if (err) { console.log(err) }
+        res.send(successResponse(rows))
+    })
+}
 
-module.exports = { order_list, getUsers, works };
+module.exports = { order_list, getUsers, works, my_collects };

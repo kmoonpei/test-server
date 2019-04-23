@@ -13,15 +13,29 @@ const allCaipu = (req, res, next) => {
     })
 }
 const caipuDetail = (req, res, next) => {
-    const id = req.body.id
-    connection.query(`SELECT COUNT(cpid) AS count FROM collect_caipu WHERE cpid=${id}`, function (err, rows, fields) {
+    const id = req.body.cpid
+    // let uid = req.session.uid;
+    let uid = req.body.uid
+    console.log("session_data:", req.session)
+    connection.query(`SELECT * FROM collect_caipu WHERE cpid=${id}`, function (err, rows, fields) {
         if (err) { console.log(err) }
-        let count = rows[0].count;
-        connection.query(`SELECT *,${count} AS collect_count FROM caipu WHERE id=${id}`, function (err, rows1, fields) {
+        let count = rows.length ? rows.length : 0;
+        let is_collected = 0;
+        console.log("rows:", rows)
+        rows.forEach(item => {
+            console.log("item.uid:", item.uid)
+            console.log("uid:", uid)
+
+            if (item.uid === uid) {
+                is_collected = 1;
+                console.log("item.uid1:", item.uid)
+            }
+        })
+        connection.query(`SELECT *,${count} AS collect_count,${is_collected} AS is_collected FROM caipu WHERE id=${id}`, function (err, rows1, fields) {
             if (err) { console.log(err) }
             res.send(successResponse(rows1[0]))
         })
     })
-    
+
 }
 module.exports = { allCaipu, caipuDetail };
