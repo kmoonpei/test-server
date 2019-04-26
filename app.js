@@ -51,6 +51,7 @@ app.post('/user/info', userRouter);
 app.post('/user/works', userRouter);
 app.post('/caipu/collect', caipuRouter);
 app.post('/user/my_collects',userRouter);
+app.post('/caipu/search',caipuRouter);
 
 //静态资源
 app.use(express.static('public'));

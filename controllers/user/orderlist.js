@@ -31,10 +31,10 @@ const works = (req, res) => {
 //获取我的收藏
 const my_collects = (req, res) => {
     let { uid } = req.body;
-    connection.query(`SELECT * FROM collect_caipu WHERE uid="${uid}"`, function (err, rows, fields) {
+    connection.query(`SELECT * FROM collect_caipu AS a LEFT JOIN caipu AS b ON b.id=a.cpid WHERE a.uid=${uid}`, function (err, rows, fields) {
         if (err) { console.log(err) }
         res.send(successResponse(rows))
     })
 }
 
-module.exports = { order_list, getUsers, works, my_collects };
+module.exports = { order_list, works, my_collects };
