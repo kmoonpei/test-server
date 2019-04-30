@@ -3,7 +3,7 @@ var successResponse = require('../../utils/response');
 
 const allCaipu = (req, res, next) => {
     const page = req.body.page
-    connection.query('SELECT * FROM caipu;', function (err, rows, fields) {
+    connection.query('SELECT * FROM caipu LIMIT 10 ;', function (err, rows, fields) {
         if (err) console.log(err);
         rows.forEach(element => {
             element.material = JSON.parse(element.material);
